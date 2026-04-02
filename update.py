@@ -1,15 +1,14 @@
-from enum import IntEnum
 from display import display_character
 import utils
 
-class Update_Menu_Options(IntEnum):
-    EXIT = 0
-    UPDATE_NAME = 1
-    UPDATE_LEVEL = 2
-    UPDATE_RACE = 3
-    UPDATE_CLASS = 4
-    UPDATE_STATS = 5
-    UPDATE_INVENTORY = 6
+class Update_Menu_Options(utils.MenuOption):
+    EXIT = 0, "Return To Character Choice Menu"
+    UPDATE_NAME = 1, "Update Name"
+    UPDATE_LEVEL = 2, "Update Level"
+    UPDATE_RACE = 3, "Update Race"
+    UPDATE_CLASS = 4, "Update Class"
+    UPDATE_STATS = 5, "Update Stats"
+    UPDATE_INVENTORY = 6, "Update Inventory"
 
 lowest, highest = utils.get_enum_highest_lowest(Update_Menu_Options)
 
@@ -69,19 +68,14 @@ def update_character_inventory(character):
 def display_character_update_menu(character):
     print("\nDisplaying character info:")
     display_character(character)
-    print("\nPress 1 to update name")
-    print("Press 2 to update level")
-    print("Press 3 to update race")
-    print("Press 4 to update class")
-    print("Press 5 to update stats")
-    print("Press 6 to update inventory")
-    print("Press 0 to return to character choice menu")
+    print("\nChoose a feature to use by entering its number!")
+    utils.print_menu_options(Update_Menu_Options)
 
 
 def display_update_menu(characters):
-    print(f"{"="*100}")
-    print("="*40,"Update Characters","="*41)
-    print("="*100,"\n\n")
+    print(f"{'='*100}")
+    print(f"{'='*40} Update Characters {'='*41}")
+    print(f"{'='*100}\n\n")
     print("Choose a character to update by entering its number!")
     print("0. Return to Main Menu")
     counter = 1

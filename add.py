@@ -1,10 +1,9 @@
 import utils
 from random import randrange
-from enum import IntEnum
 
-class Add_Menu_Options(IntEnum):
-    EXIT = 0
-    ADD_CHARACTER = 1
+class Add_Menu_Options(utils.MenuOption):
+    EXIT = 0, "Back To Main Menu"
+    ADD_CHARACTER = 1, "Create New Character"
 
 def create_stats(stats):
     stats_dict = {}
@@ -35,17 +34,16 @@ def manual_stats_input():
     return create_stats(stats)
 
 def display_add_main_menu():
-    print(f"\n{"="*100}")
+    print(f"\n{'=' * 100}")
     print("="*40,"Character Creation","="*40)
     print("="*100,"\n\n")
-    print("Enter 1 to create a new character, or 0 to return to main menu!")
-    print("1. Create New Character")
-    print("0. Back To Main Menu")
+    print("Choose a feature to use by entering its number!")
+    utils.print_menu_options(Add_Menu_Options)
 
 def add_inventory_items(inventory):
     is_active = True
     while (is_active):
-        print(f"Current inventory: {", ".join(inventory)}")
+        print(f"Current inventory: {', '.join(inventory)}")
         print("Press 1 to enter another inventory item, or 0 to finish")
         inventory_choice = input("Choice: ")
         if inventory_choice == '1':
