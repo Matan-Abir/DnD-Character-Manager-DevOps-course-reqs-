@@ -1,24 +1,20 @@
 import utils
 from math import floor
-from enum import IntEnum
 
-class Display_Menu_Options(IntEnum):
-    EXIT = 0
-    DISPLAY_ALL = 1
-    DISPLAY_BY_LEVEL = 2
-    DISPLAY_BY_KEYWORD = 3
+class Display_Menu_Options(utils.MenuOption):
+     EXIT = 0, "Back To Main Menu"
+     DISPLAY_ALL = 1, "Display All Characters"
+     DISPLAY_BY_LEVEL = 2, "Display All Characters (Sorted Descending by Level)"
+     DISPLAY_BY_KEYWORD = 3, "Display All Characters (Filtered By Keyword)"
 
 lowest, highest = utils.get_enum_highest_lowest(Display_Menu_Options)
 
 def display_display_menu():
-        print("="*100)
-        print("="*41,"Character Display","="*40)
-        print("="*100,"\n\n")
-        print("Choose a feature to use by entering its number!")
-        print("1. Display All Characters")
-        print("2. Display All Characters (Sorted Descending by Level)")
-        print("3. Display All Characters (Filtered By Keyword)")
-        print("0. Back To Main Menu")
+     print("="*100)
+     print("="*41,"Character Display","="*40)
+     print("="*100,"\n\n")
+     print("Choose a feature to use by entering its number!")
+     utils.print_menu_options(Display_Menu_Options)
 
 def display_all_characters(characters):
      for character in characters:

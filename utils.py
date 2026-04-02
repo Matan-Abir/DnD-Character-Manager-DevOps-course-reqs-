@@ -1,3 +1,16 @@
+from enum import IntEnum
+
+class MenuOption(IntEnum):
+    label: str
+
+    def __new__(cls, value: int, label: str) -> "MenuOption":
+        obj = int.__new__(cls, value)
+        obj._value_ = value
+        return obj
+
+    def __init__(self, _value: int, label: str) -> None:
+        self.label = label
+
 def menu_nav_input_numeral(lowest, highest):
     nav_input = input("\nUser Input: ")
     try:
@@ -17,6 +30,11 @@ def get_enum_highest_lowest(options):
     all_enum_values.sort()
     lowest, highest = all_enum_values[0],all_enum_values[-1]
     return lowest, highest
+
+
+def print_menu_options(options):
+    for option in options:
+        print(f"{option.value}. {option.label}")
 
 def check_stat_input_validity(stat_name):
     stat = -1

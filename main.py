@@ -4,28 +4,22 @@ from add import add_menu_main_loop
 from update import update_menu_main_loop
 from summary import summary_main_loop
 from dummy_data import dummy_data_main_loop
-from enum import IntEnum
 
-class Main_Menu_Options(IntEnum):
-    EXIT = 0
-    DISPLAY = 1
-    ADD = 2
-    UPDATE = 3
-    SUMMARY = 4
-    DUMMY = 5
+class Main_Menu_Options(utils.MenuOption):
+    EXIT = 0, "Exit"
+    DISPLAY = 1, "Display Characters"
+    ADD = 2, "Add New Character"
+    UPDATE = 3, "Update Existing Character"
+    SUMMARY = 4, "Summary of Existing Characters"
+    DUMMY = 5, "Load Dummy Data (Debug)"
 
 def display_main_menu():
-    print(f"\n{"="*100}")
+    print(f"\n{'=' * 100}")
     print("="*37,"Dungeons And Dragons 5E","="*38)
     print("="*37,"Character Tracking Tool","="*38)
     print("="*100,"\n\n")
     print("Choose a feature to use by entering its number!")
-    print("1. Display Characters")
-    print("2. Add New Character")
-    print("3. Update Existing Character")
-    print("4. Summary of Existing Characters")
-    print("5. Load Dummy Data (Debug)")
-    print("0. Exit")
+    utils.print_menu_options(Main_Menu_Options)
 
 
 def exit_program():
