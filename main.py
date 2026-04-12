@@ -14,6 +14,9 @@ class Main_Menu_Options(IntEnum):
     SUMMARY = 4
     DUMMY = 5
 
+"""
+Displays the main menu
+"""
 def display_main_menu():
     print(f"\n{"="*100}")
     print("="*37,"Dungeons And Dragons 5E","="*38)

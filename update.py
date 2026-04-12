@@ -13,22 +13,37 @@ class Update_Menu_Options(IntEnum):
 
 lowest, highest = utils.get_enum_highest_lowest(Update_Menu_Options)
 
+"""
+Changes a character's name.
+"""
 def update_character_name(character):
     print(f"Current character name: {character['name']}")
     character['name'] = input("What would you like this character's new name to be? Input new name: ")
 
+"""
+Changes a character's level.
+"""
 def update_character_level(character):
     print(f"Current character level: {character['level']}")
     character['level'] = input("What would you like this character's new level to be? Input new level: ")
 
+"""
+Changes a character's race.
+"""
 def update_character_race(character):
     print(f"Current character race: {character['race']}")
     character['race'] = input("What would you like this character's new race to be? Input new race: ")
 
+"""
+Changes a character's class.
+"""
 def update_character_class(character):
     print(f"Current character clas: {character['class']}")
     character['class'] = input("What would you like this character's new class to be? Input new class: ")
 
+"""
+Changes a character's stats.
+"""
 def update_character_stats(character):
     stats = character['stats']
     print(f"Current character stats: \nSTR: {stats['str']}\tDEX: {stats['dex']}\tCON: {stats['con']}")
@@ -41,6 +56,9 @@ def update_character_stats(character):
     stats['wis'] = utils.check_stat_input_validity("wisdom")
     stats['cha'] = utils.check_stat_input_validity("charisma")
 
+"""
+Changes a character's inventory.
+"""
 def update_character_inventory(character):
     inventory = character['inventory']
     is_active = True
@@ -66,6 +84,9 @@ def update_character_inventory(character):
         except IndexError:
             print(f"Input must be N (capital letter) or between 0 and {len(inventory)}")
 
+"""
+Displays a specific character's update menu.
+"""
 def display_character_update_menu(character):
     print("\nDisplaying character info:")
     display_character(character)
@@ -78,6 +99,9 @@ def display_character_update_menu(character):
     print("Press 0 to return to character choice menu")
 
 
+"""
+Displays the update menu.
+"""
 def display_update_menu(characters):
     print(f"{"="*100}")
     print("="*40,"Update Characters","="*41)

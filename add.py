@@ -6,6 +6,15 @@ class Add_Menu_Options(IntEnum):
     EXIT = 0
     ADD_CHARACTER = 1
 
+"""
+Creates the stats dictionary and assigns it the values from character creation
+
+Args:
+    stats (list): A list of 6 stats
+
+Returns:
+    dictionary: a dict of 6 stats
+"""
 def create_stats(stats):
     stats_dict = {}
     stats_dict['str'] = stats[0]
@@ -16,6 +25,13 @@ def create_stats(stats):
     stats_dict['cha'] = stats[5]
     return stats_dict
 
+"""
+Creates the stats for a character randomly by summing three
+random numbers between 1 and 6 for each stat
+
+Returns: 
+    list: 6 random stats
+"""
 def randomize_stats():
     stats = []
     for i in range(6):
@@ -23,7 +39,9 @@ def randomize_stats():
     return create_stats(stats)
 
 
-
+"""
+Manual inputs for the 6 stats with validity checks
+"""
 def manual_stats_input():
     stats = []
     stats.append(utils.check_stat_input_validity("strength"))
@@ -34,6 +52,10 @@ def manual_stats_input():
     stats.append(utils.check_stat_input_validity("charisma"))
     return create_stats(stats)
 
+"""
+Display the "Add Character" menu
+"""
+
 def display_add_main_menu():
     print(f"\n{"="*100}")
     print("="*40,"Character Creation","="*40)
@@ -42,11 +64,17 @@ def display_add_main_menu():
     print("1. Create New Character")
     print("0. Back To Main Menu")
 
+"""
+A looping menu for adding inventory items for characters
+"""
 def add_inventory_items(inventory):
     is_active = True
     while (is_active):
-        print(f"Current inventory: {", ".join(inventory)}")
-        print("Press 1 to enter another inventory item, or 0 to finish")
+        if (inventory): # if inventory has items
+            print(f"\nCurrent inventory: {", ".join(inventory)}")
+        else:
+            print("\nInventory currently has no items in it.")
+        print("\nPress 1 to enter another inventory item, or 0 to finish")
         inventory_choice = input("Choice: ")
         if inventory_choice == '1':
             print("Enter new item: ")
@@ -62,7 +90,20 @@ def add_inventory_items(inventory):
     
     return inventory
     
+"""
+Create the character
 
+Args:
+    name (string): The character's name
+    level (int): The character's level
+    race (string): The character's race
+    character_class (string): the character's class
+    stats (dictionary): A dictionary of the 6 stats
+    inventory (list): A list of the character's items
+
+Returns:
+    character: The "character" object
+"""
 def finalize_character(name, level, race, character_class, stats, inventory):
     character = {}
     character['name'] = name
@@ -73,15 +114,28 @@ def finalize_character(name, level, race, character_class, stats, inventory):
     character['inventory'] = inventory
     return character
 
+"""
+Create a character.
+"""
 def create_character():
     print("\nWhat is the new character's name? ")
-    name = input("Name: ")
+    name = utils.non_empty_input("Name: ")
     print("\nWhat is the new character's level? ")
-    level = input("Level: ")
+    level_invalid = True
+    while level_invalid:
+        try:
+            level = input("Level: ")
+            level_as_int = int(level)
+            if level_as_int < 1:
+                input("Level must be 1 or higher!")
+            else: 
+                level_invalid = False
+        except:
+            input("You must enter a number!")
     print("\nWhat is the new character's race? ")
-    race = input("Race: ")
+    race = utils.non_empty_inputinput("Race: ")
     print("\nWhat is the new character's class? ")
-    character_class = input("Class: ")
+    character_class = utils.non_empty_inputinput("Class: ")
     stats = None
     print("\nWhat is the new character's stats? ")
     print("Press 1 to manually input, 2 for randomization.")

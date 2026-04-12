@@ -10,6 +10,9 @@ class Display_Menu_Options(IntEnum):
 
 lowest, highest = utils.get_enum_highest_lowest(Display_Menu_Options)
 
+"""
+Display the menu for this.. well, menu.
+"""
 def display_display_menu():
         print("="*100)
         print("="*41,"Character Display","="*40)
@@ -20,10 +23,19 @@ def display_display_menu():
         print("3. Display All Characters (Filtered By Keyword)")
         print("0. Back To Main Menu")
 
+"""
+Displays all the characters
+"""
 def display_all_characters(characters):
-     for character in characters:
-          display_character(character)
+     if len(characters) > 0:
+          for character in characters:
+               display_character(character)
+     else:
+          input("\nNo characters to display! Press enter to return..")
 
+"""
+Displays a specific character
+"""
 def display_character(character):
     print(f"\nName: {character['name']}")
     print(f"{character['race']} {character['class']}")
@@ -42,22 +54,31 @@ def display_character(character):
               print(f"-{item}")
     print("\n")
 
+"""
+Displays all characters sorted by their levels from highest to lowest
+"""
 def display_characters_by_level(characters):
-     sorted_characters = sorted(characters, key=lambda x: x["level"], reverse=True)
-     display_all_characters(sorted_characters)
+     if len(characters) > 0:
+          sorted_characters = sorted(characters, key=lambda x: x["level"], reverse=True)
+          display_all_characters(sorted_characters)
+     else:
+          input("\nNo characters to display! Press enter to return..")
 
+"""
+Searches all characters via a keyword and then displays those
+who have that keyword in one of their attributes
+"""
 def display_characters_by_keyword(characters):
      result_list = []
-     print("Please enter the keyword to search by: ")
-     search_keyword = input()
+     search_keyword = utils.non_empty_input("Please enter the keyword to search by: ")
      for character in characters:
           inventory = dict.get(character, 'inventory')
-          if (search_keyword in dict.values(character) or
-              search_keyword in dict.values(character['stats']) or
-              (inventory is not None and search_keyword in inventory)): 
+          if (search_keyword in character['name'] or search_keyword == character['level'] or
+              search_keyword in character['class'] or search_keyword in character['race'] or
+              search_keyword in character['stats'] or search_keyword in inventory):
                result_list.append(character)
      if len(result_list) == 0:
-          print(f"No characters matching the keyword {search_keyword} found!")
+          input(f"\nNo characters matching the keyword {search_keyword} found!")
      else:
           for character in result_list:
                display_all_characters(result_list)
@@ -73,10 +94,13 @@ def display_menu_main_loop(characters):
         match nav_input:
              case Display_Menu_Options.DISPLAY_ALL:
                   display_all_characters(characters)
+                  input("\nPress enter to return to the menu.")
              case Display_Menu_Options.DISPLAY_BY_LEVEL:
                   display_characters_by_level(characters)
+                  input("\nPress enter to return to the menu.")
              case Display_Menu_Options.DISPLAY_BY_KEYWORD:
                   display_characters_by_keyword(characters)
+                  input("\nPress enter to return to the menu.")
              case Display_Menu_Options.EXIT:
                   print("\nExiting Display Menu...")
                   input("Press enter to continue...\n")
