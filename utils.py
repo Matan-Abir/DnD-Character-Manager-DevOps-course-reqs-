@@ -1,3 +1,5 @@
+import random #matanmo - import random to roll a dice
+
 """
 Allows for navigation in menus via numbers.
 """
@@ -63,3 +65,27 @@ def non_empty_input(input_text):
         if user_input != "":
             return user_input
         input("\nYou have to enter some text to proceed. Press enter to try again..\n")
+
+
+#matanmo - roll a dice func that print user a random result of a cube 
+def roll_a_dice():
+    """
+    This function is print to user a random roll of a cube between 1 to 6 until he want to exit
+    """
+    print('') #spacer
+    while True: #to roll a dice until user choose to end
+        roll = random.randint(1,6) #the random number that actualy the roll result
+        print(f'Your rolled: {roll}') #print the roll result to user
+        print('') #spacer
+        user_choice = input('Roll again? (yes/no): ').lower() #ask user to roll again
+        print('') #spacer
+        if user_choice == 'y' or user_choice == 'yes': #if yes run the while again
+            continue
+        elif user_choice == 'n' or user_choice == 'no': #if not break the while and return to main menu
+            break
+        else: #if user not enter yes or no, let them know and return them to main menu
+            print("You enter wrong input! You should enter only \'yes\' or \'no\'!")
+            print('') #spacer
+            break
+    print('Return to main menu...')
+    return
