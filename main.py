@@ -13,6 +13,7 @@ class Main_Menu_Options(IntEnum):
     UPDATE = 3
     SUMMARY = 4
     DUMMY = 5
+    DICE = 6 #matanmo - add to enum main menu options the dice option
 
 """
 Displays the main menu
@@ -28,6 +29,7 @@ def display_main_menu():
     print("3. Update Existing Character")
     print("4. Summary of Existing Characters")
     print("5. Load Dummy Data (Debug)")
+    print("6. Roll a Dice") #matanmo - add to the printed menu the roll a dice option
     print("0. Exit")
 
 
@@ -67,6 +69,10 @@ while (True):
             print("Loading dummy data...")
             input()
             characters = dummy_data_main_loop(characters)
+            pass
+        case Main_Menu_Options.DICE: #matanmo - add menu case if user choose to roll a dice
+            print("\nLoading roll a dice")
+            utils.roll_a_dice()
             pass
         case Main_Menu_Options.EXIT:
             print("Exiting program. Goodbye!")
